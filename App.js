@@ -13,7 +13,7 @@ export default class App extends React.Component {
       data: [],
       error: null,
       refreshing: false,
-      base_url: "http://10.10.5.145:8000"
+      base_url: "https://pyconlunchbeta.azurewebsites.net"
     }
   }
 
@@ -23,7 +23,7 @@ export default class App extends React.Component {
   }
 
   fetchDataFromApi = ()  => {
-    const url = "http://10.10.5.145:8000/api/list.json";
+    const url = "https://pyconlunchbeta.azurewebsites.net/api/list.json";
 
     this.setState({ loading: true });
 
@@ -49,7 +49,7 @@ export default class App extends React.Component {
         refreshing: true
       },
       () => {
-        // this.fetchDataFromApi();/
+        this.fetchDataFromApi();
       }
     );
   };
@@ -81,10 +81,12 @@ export default class App extends React.Component {
           data={this.state.data}
           renderItem={({ item }) => (
             <ListItem
-              roundAvatar
+              avatar
               title={`${item.name}`}
-              subtitle={item.menu}
-              avatar={{ uri: `${this.state.base_url}${item.photo}` }}
+              subtitle={<View style={styles.subtitleView}>
+            <Text style={styles.menuText}>{item.menu}</Text>
+            </View>}
+              avatar={{ uri: `${this.state.base_url}${item.photo}`, width: 800, height: 600 }}
               containerStyle={{ borderBottomWidth: 0 }}
             />
           )}
@@ -107,4 +109,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+   subtitleView: {
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 5
+  },
+  menuText: {
+    paddingLeft: 10,
+    color: 'grey'
+  },
+  titleText: {
+    fontWeight: 'bold'
+  },
+  restaurantImage: {
+    width: 600, 
+    height: 800
+  }
 });
