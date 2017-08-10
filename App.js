@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
-import { List, ListItem, SearchBar } from "react-native-elements";
+import { List, ListItem, SearchBar, Avatar } from "react-native-elements";
 
 export default class App extends React.Component {
 
@@ -61,7 +61,8 @@ export default class App extends React.Component {
           height: 1,
           width: "86%",
           backgroundColor: "#CED0CE",
-          marginLeft: "14%"
+          marginLeft: "14%",
+          marginTop: "3%"
         }}
       />
     );
@@ -72,22 +73,27 @@ export default class App extends React.Component {
   };
 
   render() {
-    let pic = {
-      uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'
-    };
     return (
       <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
         <FlatList
           data={this.state.data}
           renderItem={({ item }) => (
             <ListItem
-              avatar
+              avatar={<Avatar
+                      xlarge
+                      source={{uri: `${this.state.base_url}${item.photo}`}}
+                      onPress={() => console.log("Works!")}
+                      containerStyle={{marginBottom: 2}}
+                      avatarStyle={{resizeMode: "cover"}}
+                />}
               title={`${item.name}`}
+              titleStyle={{ fontSize: 16}}
+              titleContainerStyle = {{ marginLeft: 120 }}
               subtitle={<View style={styles.subtitleView}>
             <Text style={styles.menuText}>{item.menu}</Text>
+            <Text style={styles.locText}>{item.address}</Text>
             </View>}
-              avatar={{ uri: `${this.state.base_url}${item.photo}`, width: 800, height: 600 }}
-              containerStyle={{ borderBottomWidth: 0 }}
+              containerStyle={{ borderBottomWidth: 0, marginBottom: 20 }}
             />
           )}
           keyExtractor={item => item.id}
@@ -110,13 +116,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
    subtitleView: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     paddingLeft: 10,
-    paddingTop: 5
+    paddingTop: 5,
+    marginLeft: 110
   },
   menuText: {
     paddingLeft: 10,
     color: 'grey'
+  },
+  locText: {
+    paddingLeft: 10,
+    color: 'grey',
+    marginTop: 6,
+    fontSize: 12
   },
   titleText: {
     fontWeight: 'bold'

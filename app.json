@@ -6,7 +6,6 @@
     "sdkVersion": "19.0.0",
     "privacy": "public",
     "version": "1.0.0",
-    "loading" : "loading..",
    "ios": {
       "bundleIdentifier": "co.pythonlunch.ios.app"
     },
