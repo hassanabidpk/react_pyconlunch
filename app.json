@@ -7,10 +7,10 @@
     "privacy": "public",
     "version": "1.0.0",
    "ios": {
-      "bundleIdentifier": "co.pythonlunch.ios.app"
+      "bundleIdentifier": "co.pyconlunch.ios.app"
     },
    "android": {
-      "package": "co.pythonlunch.android.app"
+      "package": "co.pyconlunch.android.app"
     }
   }
 }

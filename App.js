@@ -2,8 +2,18 @@
 import React from 'react';
 import { StyleSheet, Text, FlatList, ActivityIndicator, View, Image } from 'react-native';
 import { List, ListItem, SearchBar, Avatar } from "react-native-elements";
+import { StackNavigator } from 'react-navigation';
+import { constants } from 'expo';
 
-export default class App extends React.Component {
+
+class DetailScreen extends React.Component {
+  render() {
+    return <Text>Details View</Text>
+  }
+
+}
+
+class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -80,11 +90,12 @@ export default class App extends React.Component {
           renderItem={({ item }) => (
             <ListItem
               avatar={<Avatar
-                      xlarge
                       source={{uri: `${this.state.base_url}${item.photo}`}}
                       onPress={() => console.log("Works!")}
                       containerStyle={{marginBottom: 2}}
                       avatarStyle={{resizeMode: "cover"}}
+                      width={140}
+                      height={130}
                 />}
               title={`${item.name}`}
               titleStyle={{ fontSize: 16}}
@@ -105,6 +116,21 @@ export default class App extends React.Component {
         />
       </List>
     );
+  }
+}
+
+const MainNavigator = StackNavigator({
+    Home: { screen: HomeScreen },
+    Detail: { screen: DetailScreen }
+});
+
+export default class App extends React.Component {
+  render() {
+    return(
+      <View style={styles.container}>
+        <MainNavigator />
+      </View>
+    )
   }
 }
 
@@ -135,7 +161,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold'
   },
   restaurantImage: {
-    width: 600, 
+    width: 600,
     height: 800
   }
 });
