@@ -79,7 +79,9 @@ export default class HomeScreen extends React.Component {
           renderItem={({ item }) => (
             <ListItem
               onPress={() => this.props.navigation.navigate('Detail',
-              {name: `${item.name}`, menu: `${item.menu}`})}
+              {name: `${item.name}`, menu: `${item.menu}`,
+              img: `${this.state.base_url}${item.photo}`,
+              address: `${item.address}`})}
               avatar={<Avatar
                       source={{uri: `${this.state.base_url}${item.photo}`}}
                       onPress={() => console.log("Works!")}

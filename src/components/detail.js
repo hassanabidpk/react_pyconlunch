@@ -8,10 +8,20 @@ import { MapView } from 'expo';
 export default class DetailScreen extends React.Component {
   render() {
     const { navigate, state: { params } } = this.props.navigation;
+    const imgUrl =  params.img;
     return (
-      <View style={styles.subtitleView}>
+      <View style={styles.dContainer}>
         <Text style={styles.dTitleText}>{params.name}</Text>
-        <Text style={styles.locText}>{params.menu}</Text>
+        <Avatar
+                source={{uri: imgUrl}}
+                onPress={() => console.log("Works!")}
+                containerStyle={{marginBottom: 12, marginTop: 20}}
+                avatarStyle={{resizeMode: "cover"}}
+                width={300}
+                height={200}
+          />
+        <Text style={styles.dMenuText}>{params.menu}</Text>
+          <Text style={styles.dMenuText}>{params.address}</Text>
       </View>
     //   <MapView
     //    style={{ flex: 1 }}
@@ -34,6 +44,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  dContainer: {
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 30
+  },
    subtitleView: {
     flexDirection: 'column',
     paddingLeft: 10,
@@ -42,11 +59,18 @@ const styles = StyleSheet.create({
   dTitleText: {
     fontSize: 28,
     color: 'black',
+    marginTop: 12,
     textAlign: 'center'
   },
   menuText: {
     paddingLeft: 10,
     color: 'grey'
+  },
+  dMenuText: {
+    fontSize: 16,
+    paddingLeft: 10,
+    color: 'grey',
+    marginTop: 12
   },
   locText: {
     paddingLeft: 10,
